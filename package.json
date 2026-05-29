@@ -48,5 +48,13 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openfantasymap/lcars-react.git"
+  },
+  "homepage": "https://github.com/openfantasymap/lcars-react#readme",
+  "bugs": {
+    "url": "https://github.com/openfantasymap/lcars-react/issues"
   }
 }
