@@ -61,5 +61,27 @@ if ((bg.match(/lcars-bargraph__bar/g) || []).length !== 3) {
   console.error('✗ BarGraph bar count !== 3');
 } else console.log('✓ BarGraph bar count');
 
+check('Dpad', render(h(L.LcarsDpad, {})),
+  'lcars-dpad', '<svg', 'seg corner', 'hub');
+
+// Render system: structural recursion + registry widget
+const screen = {
+  type: 'row',
+  fill: true,
+  content: [
+    { type: 'button', label: 'Engage', color: 'danger' },
+    { type: 'spacer' },
+  ],
+};
+const registry = {
+  button: {
+    component: L.LcarsButton,
+    props: (n) => ({ color: n.color }),
+    children: (n) => n.label,
+  },
+};
+check('Render (registry + structural)', render(h(L.LcarsRender, { node: screen, registry })),
+  'lcars-row', 'fill', 'lcars-button--danger', 'Engage', 'lcars-spacer');
+
 console.log(failures ? `\nVERIFY FAILED (${failures})` : '\nVERIFY PASSED');
 process.exit(failures ? 1 : 0);

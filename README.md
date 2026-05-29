@@ -44,6 +44,7 @@ Every core component has a wrapper, grouped by category:
 - **Engineering** — `LcarsConduit`, `LcarsPower` (+ `LcarsPowerRow`), `LcarsMsd`
 - **Comms** — `LcarsComms` (+ `LcarsCommsChannel`), `LcarsWaveform`, `LcarsHail`
 - **Transporter** — `LcarsTransporterPad`, `LcarsTransporter`
+- **Controls** — `LcarsDpad` (8-way directional pad)
 - **Overview** — `LcarsOverview` (annotated-SVG schematic)
 
 Data-driven components take their value as a prop (mapped to a CSS variable):
@@ -84,6 +85,39 @@ function Bridge() {
 - `useLcarsBind(store)` — a ref that binds raw `data-bind-*` markup / inline SVG
 
 Wire a real feed by calling `store.set(...)` from MQTT/WebSocket/etc.
+
+## Directional pad
+
+```tsx
+<LcarsDpad onSelect={(dir) => console.log(dir)} />  // dir: 'N' | 'NE' | … | 'NW'
+```
+
+## Config-driven rendering
+
+Describe a screen as JSON and render it through a widget registry. Structural
+types (`row`/`column`/`panel`/`spacer`/`grow`) recurse over `content`; any other
+`type` resolves through the registry. (Angular inputs/outputs/events/text → React
+`props`/`children`.)
+
+```tsx
+import { LcarsRender, type LcarsWidgetRegistry } from '@openfantasymap/lcars-react';
+
+const registry: LcarsWidgetRegistry = {
+  button: { component: LcarsButton, props: (n) => ({ color: n.color, onClick: () => fire(n.action) }), children: (n) => n.label },
+  gauge:  { component: LcarsGauge,  props: (n) => ({ value: n.value, label: n.label }) },
+};
+
+const screen = {
+  type: 'row', fill: true,
+  content: [
+    { type: 'gauge', value: 72, label: 'Shields' },
+    { type: 'spacer' },
+    { type: 'button', color: 'danger', label: 'Red Alert', action: 'alert' },
+  ],
+};
+
+<LcarsRender node={screen} registry={registry} />
+```
 
 ## Overview (annotated SVG)
 

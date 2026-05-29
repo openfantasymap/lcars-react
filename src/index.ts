@@ -25,4 +25,8 @@ export * from './components/conn';
 export * from './components/engineering';
 export * from './components/comms';
 export * from './components/transporter';
+export * from './components/dpad';
 export * from './components/Overview';
+
+// Config-driven screen renderer (registry) + its types.
+export * from './render';

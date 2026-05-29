@@ -1,6 +1,6 @@
 {
   "name": "@openfantasymap/lcars-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React components + hooks for the LCARS design system, wrapping @openfantasymap/lcars-core.",
   "license": "MIT",
   "type": "module",
