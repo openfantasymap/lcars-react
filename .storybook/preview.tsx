@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Preview } from '@storybook/react';
-import '@openfantasymap/lcars-core/dist/lcars.css';
+import '@openfantasymap/lcars-core/css';
 import { Lcars, type LcarsTheme } from '../src';
 
 export const globalTypes = {
