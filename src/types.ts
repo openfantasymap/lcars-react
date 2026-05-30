@@ -19,6 +19,12 @@ export type LcarsColor =
   | 'tomato'
   | 'sunflower';
 
+/** All colour roles as a runtime array (handy for pickers / iteration). */
+export const COLOR_ROLES: LcarsColor[] = [
+  'primary', 'secondary', 'tertiary', 'accent', 'muted', 'danger', 'warning', 'success',
+  'golden-tanoi', 'periwinkle', 'lilac', 'hopbush', 'pale-canary', 'butterscotch', 'tomato', 'sunflower',
+];
+
 /** Federation eras + faction skins (applied as `.lcars-theme-*`). */
 export type LcarsTheme =
   | 'tng'
